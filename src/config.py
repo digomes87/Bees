@@ -9,6 +9,7 @@ Data: 2024
 """
 
 import os
+import logging
 from pathlib import Path
 
 # Diretórios base
@@ -182,9 +183,9 @@ VISUALIZATION_CONFIG = {
 
 # Configurações de logging
 LOGGING_CONFIG = {
-    'level': 'INFO',
+    'level': logging.INFO,
     'format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    'file': RESULTS_DIR / 'analysis.log'
+    'filename': str(RESULTS_DIR / 'analysis.log')
 }
 
 # Configurações de performance

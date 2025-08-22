@@ -363,7 +363,10 @@ class BeeMigrationPredictor:
                 importance[name] = model.feature_importances_
             elif hasattr(model, 'coef_'):
                 # Modelos lineares
-                importance[name] = np.abs(model.coef_)
+                coef = np.abs(model.coef_)
+                if coef.ndim > 1:
+                    coef = coef.flatten()
+                importance[name] = coef
             else:
                 # Para outros modelos, usar permutation importance
                 from sklearn.inspection import permutation_importance
@@ -539,7 +542,7 @@ def main():
     """
     Função principal para executar predições ML.
     """
-    print("🤖 Iniciando Predições de Migração de Abelhas com ML")
+    print("Iniciando Predições de Migração de Abelhas com ML")
     print("=" * 60)
     
     # Criar preditor
@@ -549,7 +552,7 @@ def main():
     results = predictor.run_complete_ml_pipeline()
     
     # Exibir resumo
-    print("\n📊 RESUMO DOS RESULTADOS")
+    print("\nRESUMO DOS RESULTADOS")
     print("-" * 30)
     
     best_model = max(results['metrics'].keys(), 
@@ -560,9 +563,9 @@ def main():
     print(f"RMSE no teste: {results['metrics'][best_model]['test_rmse']:.4f}")
     print(f"MAE no teste: {results['metrics'][best_model]['test_mae']:.4f}")
     
-    print("\n✅ Pipeline de ML concluído com sucesso!")
-    print(f"📁 Modelos salvos em: {RESULTS_DIR / 'models'}")
-    print(f"📊 Métricas salvas em: {RESULTS_DIR}")
+    print("\nPipeline de ML concluído com sucesso!")
+    print(f"Modelos salvos em: {RESULTS_DIR / 'models'}")
+    print(f"Métricas salvas em: {RESULTS_DIR}")
     
     return results
 

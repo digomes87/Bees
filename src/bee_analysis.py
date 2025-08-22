@@ -651,7 +651,7 @@ def main():
     """
     Função principal para executar a análise.
     """
-    print("🐝 Iniciando Análise de Abelhas e Mudanças Climáticas")
+    print("Iniciando Análise de Abelhas e Mudanças Climáticas")
     print("=" * 60)
     
     # Criar analisador
@@ -661,15 +661,15 @@ def main():
     results = analyzer.run_complete_analysis()
     
     # Exibir resumo
-    print("\n📊 RESUMO DA ANÁLISE")
+    print("\nRESUMO DA ANÁLISE")
     print("-" * 30)
     print(f"Total de registros analisados: {results['data_summary']['total_records']}")
     print(f"Regiões: {', '.join(results['data_summary']['regions'])}")
     print(f"Período: {results['data_summary']['year_range'][0]} - {results['data_summary']['year_range'][1]}")
     
-    print("\n✅ Análise concluída com sucesso!")
-    print(f"📁 Resultados salvos em: {RESULTS_DIR}")
-    print(f"📈 Gráficos disponíveis em: {IMAGES_DIR}")
+    print("\nAnálise concluída com sucesso!")
+    print(f"Resultados salvos em: {RESULTS_DIR}")
+    print(f"Gráficos disponíveis em: {IMAGES_DIR}")
     
     return results
 
