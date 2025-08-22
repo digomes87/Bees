@@ -1,0 +1,75 @@
+name: bee-migration-analysis
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  # Python version
+  - python=3.9
+  
+  # Core data science libraries
+  - numpy>=1.21.0
+  - pandas>=1.5.0
+  - scipy>=1.9.0
+  
+  # Machine learning
+  - scikit-learn>=1.2.0
+  - joblib>=1.2.0
+  
+  # Visualization
+  - matplotlib>=3.6.0
+  - seaborn>=0.12.0
+  - plotly>=5.12.0
+  
+  # Geospatial analysis
+  - geopandas>=0.12.0
+  - folium>=0.14.0
+  - cartopy>=0.21.0
+  - shapely>=2.0.0
+  - fiona>=1.8.0
+  - pyproj>=3.4.0
+  
+  # Data APIs and web requests
+  - requests>=2.28.0
+  - urllib3>=1.26.0
+  
+  # File I/O and data formats
+  - openpyxl>=3.0.0
+  - xlsxwriter>=3.0.0
+  - h5py>=3.7.0
+  
+  # Development tools
+  - jupyter>=1.0.0
+  - jupyterlab>=3.6.0
+  - ipykernel>=6.20.0
+  
+  # Testing (optional)
+  - pytest>=7.0.0
+  - pytest-cov>=4.0.0
+  
+  # Code quality (optional)
+  - black>=23.0.0
+  - isort>=5.12.0
+  - flake8>=6.0.0
+  
+  # Additional dependencies via pip
+  - pip
+  - pip:
+    # Specific packages not available in conda-forge
+    - pygbif>=0.6.0  # GBIF API client
+    - rasterio>=1.3.0  # Raster data processing
+    - xarray>=2023.1.0  # Multi-dimensional arrays
+    - netcdf4>=1.6.0  # NetCDF file support
+    - dask>=2023.1.0  # Parallel computing
+    - memory-profiler>=0.60.0  # Memory profiling
+    
+    # Future dashboard dependencies
+    - streamlit>=1.20.0
+    - dash>=2.10.0
+    
+    # API development
+    - fastapi>=0.95.0
+    - uvicorn>=0.20.0
+    - pydantic>=1.10.0
+    
+    # Environment management
+    - python-dotenv>=1.0.0

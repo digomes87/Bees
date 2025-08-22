@@ -1,0 +1,296 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bee-migration-analysis"
+version = "1.0.0"
+authors = [
+    {name = "Diego Gomes", email = "diego@example.com"},
+]
+description = "Climate Impact Assessment on Bee Migration Patterns"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Scientific/Engineering :: Atmospheric Science",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Operating System :: OS Independent",
+]
+keywords = ["bees", "migration", "climate", "analysis", "machine-learning", "geospatial"]
+license = {text = "MIT"}
+dependencies = [
+    "pandas>=1.3.0",
+    "numpy>=1.21.0",
+    "matplotlib>=3.4.0",
+    "seaborn>=0.11.0",
+    "scikit-learn>=1.0.0",
+    "geopandas>=0.10.0",
+    "folium>=0.12.0",
+    "plotly>=5.0.0",
+    "requests>=2.25.0",
+    "scipy>=1.7.0",
+    "joblib>=1.0.0",
+    "openpyxl>=3.0.0",
+    "xlsxwriter>=3.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-mock>=3.8.0",
+    "pytest-xdist>=3.0.0",
+    "pytest-timeout>=2.1.0",
+    "coverage>=6.0.0",
+    "black>=22.0.0",
+    "flake8>=5.0.0",
+    "mypy>=0.991",
+    "isort>=5.10.0",
+    "bandit>=1.7.0",
+    "safety>=2.0.0",
+    "pre-commit>=2.20.0",
+    "pydocstyle>=6.1.0",
+]
+test = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-mock>=3.8.0",
+    "coverage>=6.0.0",
+]
+docs = [
+    "sphinx>=4.0.0",
+    "sphinx-rtd-theme>=1.0.0",
+    "myst-parser>=0.18.0",
+    "sphinx-autodoc-typehints>=1.19.0",
+]
+viz = [
+    "plotly>=5.0.0",
+    "dash>=2.0.0",
+    "streamlit>=1.0.0",
+    "bokeh>=2.4.0",
+]
+api = [
+    "fastapi>=0.70.0",
+    "uvicorn>=0.15.0",
+    "pydantic>=1.8.0",
+    "python-multipart>=0.0.5",
+]
+notebooks = [
+    "jupyter>=1.0.0",
+    "ipykernel>=6.0.0",
+    "nbconvert>=6.0.0",
+    "nbformat>=5.0.0",
+]
+performance = [
+    "dask>=2021.0.0",
+    "numba>=0.56.0",
+    "memory-profiler>=0.60.0",
+    "line-profiler>=3.5.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/diegogo/bee-migration-analysis"
+"Bug Reports" = "https://github.com/diegogo/bee-migration-analysis/issues"
+"Source" = "https://github.com/diegogo/bee-migration-analysis"
+"Documentation" = "https://github.com/diegogo/bee-migration-analysis/blob/main/README.md"
+
+[project.scripts]
+bee-analysis = "bee_migration.cli:main"
+generate-charts = "bee_migration.charts:main"
+run-analysis = "bee_migration.analysis:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+bee_migration = ["data/*.csv", "data/*.json", "templates/*.html", "static/*"]
+
+# Black configuration
+[tool.black]
+line-length = 88
+target-version = ['py38', 'py39', 'py310', 'py311']
+include = '\.pyi?$'
+extend-exclude = '''
+(
+  /(
+      \.eggs
+    | \.git
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+    | migrations
+  )/
+)
+'''
+
+# isort configuration
+[tool.isort]
+profile = "black"
+line_length = 88
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+src_paths = ["src", "tests"]
+skip_glob = ["**/migrations/*"]
+
+# mypy configuration
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+check_untyped_defs = true
+disallow_untyped_decorators = false
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+show_error_codes = true
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = [
+    "geopandas.*",
+    "folium.*",
+    "plotly.*",
+    "seaborn.*",
+    "sklearn.*",
+    "scipy.*",
+    "cartopy.*",
+    "shapely.*",
+    "fiona.*",
+    "pyproj.*",
+]
+ignore_missing_imports = true
+
+# pytest configuration
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--verbose",
+    "--tb=short",
+    "--cov=src",
+    "--cov-report=term-missing",
+    "--cov-report=html:htmlcov",
+    "--cov-report=xml",
+    "--cov-fail-under=80",
+    "--durations=10",
+    "--color=yes",
+    "-ra",
+]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+    "api: marks tests that require API access",
+    "data: marks tests that require data files",
+    "ml: marks tests for machine learning components",
+    "viz: marks tests for visualization components",
+    "geo: marks tests for geospatial analysis",
+    "climate: marks tests for climate data analysis",
+    "migration: marks tests for migration analysis",
+    "performance: marks tests for performance benchmarks",
+]
+filterwarnings = [
+    "error",
+    "ignore::UserWarning",
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning",
+    "ignore::FutureWarning",
+    "ignore:.*GDAL.*:RuntimeWarning",
+    "ignore:.*shapely.*:RuntimeWarning",
+    "ignore:.*geopandas.*:UserWarning",
+]
+
+# Coverage configuration
+[tool.coverage.run]
+source = ["src"]
+branch = true
+parallel = true
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__pycache__/*",
+    "*/venv/*",
+    "*/env/*",
+    "*/.venv/*",
+    "*/.env/*",
+    "*/site-packages/*",
+    "*/build/*",
+    "*/dist/*",
+    "*/.git/*",
+    "*/.pytest_cache/*",
+    "*/htmlcov/*",
+    "*/docs/*",
+    "*/notebooks/*",
+    "*/examples/*",
+    "*/scripts/*",
+    "*/data/*",
+    "*/images/*",
+    "*/results/*",
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+skip_empty = true
+sort = "Cover"
+precision = 2
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self\.debug",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if False:",
+    "if __name__ == .__main__.:",
+    "@(abc\.)?abstractmethod",
+    "if TYPE_CHECKING:",
+    "if sys.platform",
+    "@deprecated",
+    "logger\.",
+    "logging\.",
+    "pass",
+    "\.\.\.",
+]
+
+[tool.coverage.html]
+directory = "htmlcov"
+title = "Bee Migration Analysis Coverage Report"
+show_contexts = true
+
+[tool.coverage.xml]
+output = "coverage.xml"
+
+# Bandit security configuration
+[tool.bandit]
+exclude_dirs = ["tests", "build", "dist"]
+skips = ["B101", "B601"]
+
+# Flake8 configuration (in setup.cfg since flake8 doesn't support pyproject.toml yet)
+# See setup.cfg for flake8 configuration
