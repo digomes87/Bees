@@ -1,0 +1,49 @@
+================================================================================
+RELATÓRIO DE PREDIÇÕES - MACHINE LEARNING
+================================================================================
+Data: 22/08/2025 16:06
+Modelos treinados: 4
+Features utilizadas: 21
+
+PERFORMANCE DOS MODELOS
+----------------------------------------
+Linear Regression ⭐:
+  Test R²: 0.9966
+  Test RMSE: 0.7425
+  Test MAE: 0.6081
+  Test MAPE: 1.03%
+
+Random Forest:
+  Test R²: 0.8497
+  Test RMSE: 4.9366
+  Test MAE: 3.7414
+  Test MAPE: 7.21%
+
+Gradient Boosting:
+  Test R²: 0.8921
+  Test RMSE: 4.1826
+  Test MAE: 3.3490
+  Test MAPE: 6.32%
+
+SVR:
+  Test R²: 0.9952
+  Test RMSE: 0.8822
+  Test MAE: 0.3255
+  Test MAPE: 0.49%
+
+FEATURES MAIS IMPORTANTES
+----------------------------------------
+ 2. temperature: 22.2124
+ 4. precipitation: 9.9595
+ 7. latitude: 6.0468
+ 9. temp_lat_interaction: 4.0451
+10. precip_lat_interaction: 2.8679
+
+RECOMENDAÇÕES
+----------------------------------------
+1. Melhor modelo: Linear Regression
+2. R² de 0.997 indica boa capacidade preditiva
+3. Considerar coleta de mais dados para melhorar performance
+4. Monitorar predições em dados futuros para validação
+
+================================================================================

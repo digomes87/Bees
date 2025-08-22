@@ -1,0 +1,50 @@
+================================================================================
+RELATÓRIO DE ANÁLISE: ABELHAS E MUDANÇAS CLIMÁTICAS
+================================================================================
+Data da análise: 22/08/2025 16:05
+Período analisado: 2000 - 2023
+Regiões analisadas: Norte, Nordeste, Centro-Oeste, Sudeste, Sul
+Total de registros: 120
+
+RESUMO DOS DADOS
+----------------------------------------
+Temperatura média: 25.0°C
+Precipitação média: 1383mm
+Abundância média de abelhas: 60.9
+Diversidade média de espécies: 34.0
+Produção média de mel: 23.1kg
+
+TENDÊNCIAS PRINCIPAIS
+----------------------------------------
+Norte:
+  - Temperatura: +0.083°C/ano
+  - Abundância de abelhas: -0.69/ano
+Nordeste:
+  - Temperatura: +0.123°C/ano
+  - Abundância de abelhas: -0.80/ano
+Centro-Oeste:
+  - Temperatura: +0.129°C/ano
+  - Abundância de abelhas: -1.00/ano
+Sudeste:
+  - Temperatura: +0.116°C/ano
+  - Abundância de abelhas: -1.04/ano
+Sul:
+  - Temperatura: +0.131°C/ano
+  - Abundância de abelhas: -0.78/ano
+
+CORRELAÇÕES SIGNIFICATIVAS
+----------------------------------------
+bee_abundance ↔ bee_health_index: 0.976 (strong)
+species_diversity ↔ bee_health_index: 0.877 (strong)
+bee_abundance ↔ species_diversity: 0.821 (strong)
+precipitation ↔ honey_production: 0.625 (moderate)
+precipitation ↔ bee_health_index: 0.619 (moderate)
+
+CONCLUSÕES PRINCIPAIS
+----------------------------------------
+1. Observa-se tendência de aquecimento em todas as regiões
+2. Declínio geral na abundância de abelhas correlacionado com temperatura
+3. Variações regionais significativas nos padrões de mudança
+4. Necessidade de monitoramento contínuo e medidas de conservação
+
+================================================================================
