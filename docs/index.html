@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'wasm-unsafe-eval'; worker-src 'self' https://cdn.jsdelivr.net; connect-src 'self' https://cdn.jsdelivr.net https://api.gbif.org https://archive-api.open-meteo.com; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta
+      name="description"
+      content="Run a climate and bee migration study in your browser: regional trends, correlations and forecasting models."
+    />
+    <title>Bee Migration Study</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2l12 7v14l-12 7-12-7V9z' fill='%23b8740a'/%3E%3Cpath d='M9 13h14M9 19h14' stroke='%2317150f' stroke-width='3'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="styles/tokens.css" />
+    <link rel="stylesheet" href="styles/page.css" />
+    <link rel="stylesheet" href="styles/charts.css" />
+    <script type="module" src="scripts/main.js"></script>
+  </head>
+  <body>
+    <header class="masthead">
+      <p class="masthead-kicker">Field notebook · South America · 2000–2023</p>
+      <h1>Are the bees moving south?</h1>
+      <p class="masthead-lede">
+        A climate and pollinator study that runs entirely in your browser. Pick the
+        settings, press run, and the same Python package used on the command line
+        analyses the observations and trains the forecasting models here.
+      </p>
+      <p class="notice">
+        <strong>Simulated data.</strong> The observations below are generated from
+        assumed warming and decline rates to demonstrate the method. They are not
+        field measurements and support no scientific conclusion.
+      </p>
+    </header>
+
+    <main>
+      <form class="controls" id="controls" aria-label="Study settings">
+        <fieldset class="controls-group">
+          <legend>Study</legend>
+          <label class="field">
+            <span>Random seed</span>
+            <input type="number" name="seed" min="0" max="9999" step="1" required />
+          </label>
+          <label class="field">
+            <span>Held-out years <output name="holdoutValue"></output></span>
+            <input type="range" name="holdout" min="2" max="8" step="1" />
+          </label>
+          <label class="field">
+            <span>Forecast</span>
+            <select name="target">
+              <option value="bee_abundance">Bee abundance</option>
+              <option value="species_diversity">Species diversity</option>
+              <option value="honey_production">Honey production</option>
+            </select>
+          </label>
+          <label class="field field-check">
+            <input type="checkbox" name="thorough" />
+            <span>Tune hyperparameters (slower)</span>
+          </label>
+          <button type="submit" class="run-button">Run study</button>
+        </fieldset>
+        <fieldset class="controls-group">
+          <legend>View</legend>
+          <label class="field">
+            <span>Trend of</span>
+            <select name="measure">
+              <option value="temperature">Temperature</option>
+              <option value="precipitation">Precipitation</option>
+              <option value="bee_abundance">Bee abundance</option>
+              <option value="species_diversity">Species diversity</option>
+              <option value="honey_production">Honey production</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Forecast region</span>
+            <select name="region"></select>
+          </label>
+        </fieldset>
+      </form>
+
+      <p class="status" id="status" role="status" aria-live="polite">
+        Starting the Python runtime…
+      </p>
+
+      <div class="report" id="report" aria-busy="true"></div>
+
+      <div id="field"></div>
+    </main>
+
+    <footer class="colophon">
+      <p>
+        Computed in this page with
+        <a href="https://pyodide.org/">Pyodide</a>, pandas and scikit-learn. Field data:
+        <a href="https://www.gbif.org/">GBIF</a> occurrence records and
+        <a href="https://open-meteo.com/">Open-Meteo</a> historical weather (ERA5). Source:
+        <a href="https://github.com/digomes87/Bees">github.com/digomes87/Bees</a>.
+      </p>
+    </footer>
+  </body>
+</html>

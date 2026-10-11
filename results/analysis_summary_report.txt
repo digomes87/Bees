@@ -1,50 +1,36 @@
 ================================================================================
-RELATÓRIO DE ANÁLISE: ABELHAS E MUDANÇAS CLIMÁTICAS
+ANALYSIS REPORT: BEES AND CLIMATE CHANGE
 ================================================================================
-Data da análise: 22/08/2025 16:05
-Período analisado: 2000 - 2023
-Regiões analisadas: Norte, Nordeste, Centro-Oeste, Sudeste, Sul
-Total de registros: 120
 
-RESUMO DOS DADOS
+Period analysed: 2000 - 2023
+Regions analysed: Center-West, North, Northeast, South, Southeast
+Total records: 120
+
+DATA SUMMARY
 ----------------------------------------
-Temperatura média: 25.0°C
-Precipitação média: 1383mm
-Abundância média de abelhas: 60.9
-Diversidade média de espécies: 34.0
-Produção média de mel: 23.1kg
+Mean temperature: 25.0 °C
+Mean precipitation: 1379 mm
+Mean bee abundance: 61.1
+Mean species diversity: 34.0
+Mean honey production: 22.8 kg
 
-TENDÊNCIAS PRINCIPAIS
+REGIONAL TRENDS
 ----------------------------------------
-Norte:
-  - Temperatura: +0.083°C/ano
-  - Abundância de abelhas: -0.69/ano
-Nordeste:
-  - Temperatura: +0.123°C/ano
-  - Abundância de abelhas: -0.80/ano
-Centro-Oeste:
-  - Temperatura: +0.129°C/ano
-  - Abundância de abelhas: -1.00/ano
-Sudeste:
-  - Temperatura: +0.116°C/ano
-  - Abundância de abelhas: -1.04/ano
-Sul:
-  - Temperatura: +0.131°C/ano
-  - Abundância de abelhas: -0.78/ano
+Center-West: temperature +0.148 °C/year, bee abundance -0.54/year
+North: temperature +0.112 °C/year, bee abundance -0.74/year
+Northeast: temperature +0.091 °C/year, bee abundance -1.01/year
+South: temperature +0.117 °C/year, bee abundance -1.15/year
+Southeast: temperature +0.108 °C/year, bee abundance -0.91/year
 
-CORRELAÇÕES SIGNIFICATIVAS
+STRONGEST CORRELATIONS
 ----------------------------------------
-bee_abundance ↔ bee_health_index: 0.976 (strong)
-species_diversity ↔ bee_health_index: 0.877 (strong)
-bee_abundance ↔ species_diversity: 0.821 (strong)
-precipitation ↔ honey_production: 0.625 (moderate)
-precipitation ↔ bee_health_index: 0.619 (moderate)
+bee_abundance <-> bee_health_index: +0.977 (strong)
+species_diversity <-> bee_health_index: +0.872 (strong)
+bee_abundance <-> species_diversity: +0.819 (strong)
+precipitation <-> bee_health_index: +0.573 (moderate)
+precipitation <-> honey_production: +0.564 (moderate)
 
-CONCLUSÕES PRINCIPAIS
+KEY FINDINGS
 ----------------------------------------
-1. Observa-se tendência de aquecimento em todas as regiões
-2. Declínio geral na abundância de abelhas correlacionado com temperatura
-3. Variações regionais significativas nos padrões de mudança
-4. Necessidade de monitoramento contínuo e medidas de conservação
-
-================================================================================
+1. Warming in 5 of 5 regions
+2. Bee abundance declining in 5 of 5 regions
