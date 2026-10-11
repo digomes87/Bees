@@ -280,7 +280,6 @@ conda-meta/
 *.m~
 
 # Docker
-.dockerignore
 Dockerfile.dev
 
 # Documentation builds

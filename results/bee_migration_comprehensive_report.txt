@@ -5,8 +5,8 @@ Data de Geração: 22/08/2025 16:11:50
 
 ## RESUMO EXECUTIVO
 
-Este relatório analisa evidências científicas sobre a migração de abelhas para o sul 
-devido às mudanças climáticas, baseado em estudos recentes da UFPR, dataset Dryad 
+Este relatório analisa evidências científicas sobre a migração de abelhas para o sul
+devido às mudanças climáticas, baseado em estudos recentes da UFPR, dataset Dryad
 e pesquisas internacionais.
 
 ## 1. ESTUDO UFPR - ABELHAS SUL-AMERICANAS

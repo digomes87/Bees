@@ -1,197 +1,82 @@
-# Makefile for Bee Migration Analysis Project
+.PHONY: help install install-dev hooks test test-site lint format format-check \
+	analyze predict charts all site notebook docker-build docker-run clean check
 
-.PHONY: help install install-dev test lint format clean run-analysis generate-charts setup-env docs
-
-# Default target
 help:
-	@echo "Available commands:"
-	@echo "  install      - Install production dependencies"
-	@echo "  install-dev  - Install development dependencies"
-	@echo "  setup-env    - Setup development environment"
-	@echo "  test         - Run tests"
-	@echo "  test-cov     - Run tests with coverage"
-	@echo "  lint         - Run linting checks"
-	@echo "  format       - Format code with ruff"
-	@echo "  clean        - Clean temporary files"
-	@echo "  run-analysis - Run complete bee migration analysis"
-	@echo "  generate-charts - Generate all scientific charts"
-	@echo "  docs         - Generate documentation"
-	@echo "  security     - Run security checks"
-	@echo "  all          - Run format, lint, test, and analysis"
+	@echo "Setup"
+	@echo "  install        Install the package"
+	@echo "  install-dev    Install the package with development tools"
+	@echo "  hooks          Install the pre-commit hooks"
+	@echo "Quality"
+	@echo "  test           Run the Python tests with coverage"
+	@echo "  test-site      Run the dashboard tests"
+	@echo "  lint           Check the code with ruff"
+	@echo "  format         Format the code with ruff"
+	@echo "  check          Everything CI runs: format-check, lint, test, test-site"
+	@echo "Run"
+	@echo "  analyze        Trends, correlations and the summary report"
+	@echo "  predict        Train and compare the models"
+	@echo "  charts         Render the charts into images/"
+	@echo "  all            analyze, predict and charts"
+	@echo "  site           Build the package into the dashboard and serve it"
+	@echo "  notebook       Open the tutorial in JupyterLab"
+	@echo "Docker"
+	@echo "  docker-build   Build the image"
+	@echo "  docker-run     Run the whole pipeline in a container"
+	@echo "Other"
+	@echo "  clean          Remove caches and build leftovers"
 
-# Installation
 install:
-	@echo "Installing production dependencies..."
 	pip install -e .
 
 install-dev:
-	@echo "Installing development dependencies..."
-	pip install -e ".[dev]"
+	pip install -e ".[dev,notebook]"
 
-# Environment setup
-setup-env:
-	@echo "Setting up development environment..."
-	python -m venv .venv
-	@echo "Virtual environment created. Activate with:"
-	@echo "  source .venv/bin/activate  # On Linux/Mac"
-	@echo "  .venv\\Scripts\\activate     # On Windows"
+hooks:
+	pre-commit install
 
-setup-conda:
-	@echo "Setting up conda environment..."
-	conda env create -f environment.yml
-	@echo "Conda environment created. Activate with:"
-	@echo "  conda activate bee-migration-analysis"
-
-# Testing
 test:
-	@echo "Running tests..."
-	pytest tests/ -v
+	pytest
 
-test-cov:
-	@echo "Running tests with coverage..."
-	pytest tests/ -v --cov-report=html
+test-site:
+	node --test "tests/web/*.test.mjs"
 
-test-fast:
-	@echo "Running fast tests..."
-	pytest tests/ -v -x --ff
-
-# Code quality
 lint:
-	@echo "Running linting checks..."
-	ruff check src/ tests/
+	ruff check src tests
 
 format:
-	@echo "Formatting code..."
-	ruff format src/ tests/
-	ruff check --fix src/ tests/
+	ruff format src tests
+	ruff check --fix src tests
 
 format-check:
-	@echo "Checking code format..."
-	ruff format --check src/ tests/
+	ruff format --check src tests
 
-# Security
-security:
-	@echo "Running security checks..."
-	bandit -r src/
-	safety check
+check: format-check lint test test-site
 
-# Analysis and charts
-run-analysis:
-	@echo "Running complete bee migration analysis..."
+analyze:
 	bee-migration analyze
 
-generate-charts:
-	@echo "Generating all scientific charts..."
-	bee-migration charts
-
-run-predictor:
-	@echo "Running migration predictor..."
+predict:
 	bee-migration predict
 
-# Site
+charts:
+	bee-migration charts
+
+all:
+	bee-migration all
+
 site:
-	@echo "Building the analysis package into the site and serving it..."
 	pip wheel . --no-deps --wheel-dir docs/package
 	python -m http.server 8000 --bind 127.0.0.1 --directory docs
 
-test-site:
-	@echo "Running site tests..."
-	node --test "tests/web/*.test.mjs"
+notebook:
+	jupyter lab notebooks/bee_migration_tutorial.ipynb
 
-# Data processing
-process-data:
-	@echo "Processing raw data..."
-	@echo "Note: Implement data processing scripts as needed"
-
-download-data:
-	@echo "Downloading external data..."
-	@echo "Note: Implement data download scripts as needed"
-
-# Documentation
-docs:
-	@echo "Generating documentation..."
-	@echo "Note: Add sphinx documentation generation here"
-
-docs-serve:
-	@echo "Serving documentation locally..."
-	@echo "Note: Add local documentation server here"
-
-# Cleanup
-clean:
-	@echo "Cleaning temporary files..."
-	find . -type f -name "*.pyc" -delete
-	find . -type d -name "__pycache__" -delete
-	find . -type d -name ".pytest_cache" -delete
-	find . -type f -name ".coverage" -delete
-	find . -type d -name "htmlcov" -delete
-	find . -type d -name ".mypy_cache" -delete
-	find . -type f -name "*.log" -delete
-
-clean-data:
-	@echo "Cleaning processed data files..."
-	rm -rf data/processed/*
-	rm -rf results/*.csv
-	rm -rf results/*.pkl
-
-clean-images:
-	@echo "Cleaning generated images..."
-	rm -rf images/*.png
-	rm -rf images/*.jpg
-	rm -rf images/*.svg
-
-# Development workflow
-dev-setup: setup-env install-dev
-	@echo "Development environment ready!"
-
-dev-check: format lint test
-	@echo "Development checks completed!"
-
-# CI/CD simulation
-ci: format-check lint test security
-	@echo "CI checks completed!"
-
-# Complete workflow
-all: format lint test run-analysis generate-charts
-	@echo "Complete workflow finished!"
-
-# Git helpers
-git-setup:
-	@echo "Setting up git hooks..."
-	pre-commit install
-
-commit-check: format lint test
-	@echo "Ready for commit!"
-
-# Project information
-info:
-	@echo "Bee Migration Analysis Project"
-	@echo "=============================="
-	@echo "Python version: $(shell python --version)"
-	@echo "Project structure:"
-	@tree -L 2 -I '__pycache__|.git|.venv|*.pyc'
-
-status:
-	@echo "Project status:"
-	@echo "- Source files: $(shell find src -name '*.py' | wc -l)"
-	@echo "- Test files: $(shell find tests -name '*.py' 2>/dev/null | wc -l || echo 0)"
-	@echo "- Data files: $(shell find data -name '*.csv' 2>/dev/null | wc -l || echo 0)"
-	@echo "- Generated images: $(shell find images -name '*.png' 2>/dev/null | wc -l || echo 0)"
-	@echo "- Model files: $(shell find results/models -name '*.pkl' 2>/dev/null | wc -l || echo 0)"
-
-# Docker support (future)
 docker-build:
-	@echo "Building Docker image..."
-	@echo "Note: Add Dockerfile and build command"
+	docker compose build
 
 docker-run:
-	@echo "Running Docker container..."
-	@echo "Note: Add Docker run command"
+	docker compose run --rm analysis all
 
-# Jupyter notebook support
-jupyter:
-	@echo "Starting Jupyter Lab..."
-	jupyter lab --ip=0.0.0.0 --port=8888 --no-browser
-
-notebook-clean:
-	@echo "Cleaning notebook outputs..."
-	jupyter nbconvert --clear-output --inplace notebooks/*.ipynb
+clean:
+	find . -type d -name "__pycache__" -not -path "./.venv/*" -prune -exec rm -rf {} +
+	rm -rf .pytest_cache .ruff_cache .coverage htmlcov build docs/package src/*.egg-info
