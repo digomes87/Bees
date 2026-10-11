@@ -21,10 +21,10 @@ This project adheres to a code of conduct that promotes a welcoming and inclusiv
 
 1. Fork the repository
 2. Clone your fork: `git clone https://github.com/your-username/Bees.git`
-3. Create a new branch: `git checkout -b feature/your-feature-name`
+3. Create a new branch from `develop`: `git switch -c feature/your-feature-name develop`
 4. Make your changes
 5. Test your changes
-6. Submit a pull request
+6. Submit a pull request against `develop`
 
 ## Development Setup
 
@@ -88,19 +88,14 @@ pytest tests/test_specific_module.py
 - Follow PEP 8 guidelines
 - Use meaningful variable and function names
 - Add docstrings to all functions and classes
-- Maximum line length: 88 characters (Black formatter)
+- Maximum line length: 88 characters (ruff formatter)
 
 ### Code Formatting
 
 ```bash
-# Format code with Black
-black src/
-
-# Sort imports with isort
-isort src/
-
-# Lint with flake8
-flake8 src/
+# Format and lint with ruff
+ruff format src/ tests/
+ruff check src/ tests/
 ```
 
 ### Documentation Style
@@ -227,12 +222,36 @@ When requesting features, include:
 
 ## Development Workflow
 
-### Branch Naming
+### Branches
 
-- `feature/description`: New features
-- `fix/description`: Bug fixes
-- `docs/description`: Documentation updates
-- `refactor/description`: Code refactoring
+The project follows Git Flow:
+
+| Branch | Purpose | Receives changes from |
+|--------|---------|-----------------------|
+| `main` | Released code; every push deploys the site | `release/*` and `hotfix/*` pull requests |
+| `develop` | Integration of finished work | `feature/*`, `fix/*`, `docs/*`, `refactor/*` pull requests |
+| `feature/description` | New features | branched from `develop` |
+| `fix/description` | Bug fixes | branched from `develop` |
+| `docs/description` | Documentation updates | branched from `develop` |
+| `refactor/description` | Code refactoring | branched from `develop` |
+| `release/x.y.z` | Release preparation | branched from `develop`, merged into `main` and back into `develop` |
+| `hotfix/description` | Urgent fix of released code | branched from `main`, merged into `main` and `develop` |
+
+Nothing is pushed directly to `main` or `develop`. Every change arrives through
+a pull request, and the `CI` workflow (lint and tests for Python, tests for the
+site) must pass before it is merged.
+
+```bash
+# Work on something
+git switch -c feature/my-change develop
+# ...commit...
+git push -u origin feature/my-change
+gh pr create --base develop
+
+# Release what is on develop
+git switch -c release/1.1.0 develop
+gh pr create --base main
+```
 
 ### Code Review Process
 

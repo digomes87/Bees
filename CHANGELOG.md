@@ -5,6 +5,41 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- `bee_migration` package under `src/` with `climate`, `analysis`, `prediction`,
+  `evidence`, `charts` and `reports` modules
+- `bee-migration` command (`analyze`, `predict`, `charts`, `all`) with `--data`,
+  `--root` and `--seed` options
+- Test suite under `tests/`
+- Browser dashboard under `docs/`: the package runs in the page through Pyodide
+  and draws trends, correlations, model accuracy and forecasts
+- Field data chapter with observed temperatures (Open-Meteo, ERA5) and the mean
+  latitude of bee records (GBIF), parsed by `bee_migration.sources`
+- `CI` workflow (lint and tests) and `Pages` workflow (site deployment from `main`)
+- Git Flow branching guide in `CONTRIBUTING.md`
+
+### Changed
+- Models are evaluated on the most recent years, held out chronologically, and
+  tuned with time-ordered cross-validation
+- Feature importance is measured by permutation for every model
+- Climate stress index is expressed in regional standard deviations
+- Project metadata, pytest and ruff configuration consolidated in `pyproject.toml`
+
+### Fixed
+- Prediction features no longer include the same-year change of the target
+- Lagged correlations now compare temperature with bee abundance in later years
+- A missing `--data` file is reported as an error instead of silently falling
+  back to simulated data
+- Compatibility with pandas 3
+
+### Removed
+- Trained model files from version control; `bee-migration predict` recreates them
+- Simulated seasonality figures and percentile clipping of observations
+- Generated literature reports; the figures they quoted live in
+  `bee_migration.evidence.literature`
+
 ## [1.0.0] - 2024-01-21
 
 ### Added

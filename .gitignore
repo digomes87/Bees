@@ -320,3 +320,6 @@ data/species/*.geojson
 !results/README.md
 !images/README.md
 !docs/README.md
+# Analysis package built into the site (see `make site` and the Pages workflow)
+docs/package/
+results/*.pkl

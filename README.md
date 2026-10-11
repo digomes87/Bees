@@ -37,14 +37,17 @@ This project investigates how climate change affects bee populations in South Am
 git clone https://github.com/digomes87/Bees.git
 cd Bees
 
-# Install dependencies
-pip install -r requirements.txt
+# Install the package
+pip install -e .
 
 # Run complete analysis
-python src/bee_analysis.py
+bee-migration analyze
 
 # Run ML predictions
-python src/bee_migration_predictor.py
+bee-migration predict
+
+# Render the charts
+bee-migration charts
 ```
 
 ## 📊 Features
@@ -71,11 +74,15 @@ python src/bee_migration_predictor.py
 
 ```
 Bees/
-├── src/
-│   ├── bee_analysis.py          # Main analysis
-│   ├── bee_migration_predictor.py # ML models
-│   ├── config.py                # Configuration
-│   └── generate_charts.py       # Visualizations
+├── src/bee_migration/
+│   ├── climate/                 # Observations and simulated datasets
+│   ├── analysis/                # Temporal, correlation and geographic patterns
+│   ├── prediction/              # Features, model catalog, training, scores
+│   ├── evidence/                # Figures summarised from the cited studies
+│   ├── charts/                  # Chart panels and gallery
+│   ├── reports/                 # Plain-text reports
+│   └── cli.py                   # `bee-migration` command
+├── tests/                       # Test suite
 ├── data/
 │   ├── raw/                     # Raw data
 │   ├── processed/               # Processed data
@@ -147,9 +154,9 @@ Integrated analysis of 6 scientific studies confirms consistent pattern of bee m
 - **🔴 Aggressive**: 100% of species migrate by 2040
 
 ### ML Performance Metrics
-- **Best Model**: Random Forest (R² = 0.85)
-- **RMSE**: 12.3 (bee abundance)
-- **Important Features**: Temperature, precipitation, latitude
+- **Best Model**: Linear Regression (R² = 0.81 on the four most recent years, held out)
+- **RMSE**: 5.2 (bee abundance)
+- **Data**: simulated observations; see `results/ml_predictions_report.txt`
 
 ### Key Insights
 1. **Negative Correlation**: Temperature increase reduces abundance
@@ -245,76 +252,69 @@ This project integrated analysis of **6 main scientific studies** on bee migrati
 4. **Ecology Letters** - Bumble bee community restructuring (North America)
 5. **Kaggle Climate Data** - Climate trend validation
 
-## 🔧 Configuration
+## 🔧 Usage
 
-### Environment Variables
-```python
-# config.py
-DATA_SOURCES = {
-    'GBIF_API': 'https://api.gbif.org/v1/',
-    'WORLDCLIM_API': 'https://worldclim.org/data/',
-    'NASA_GIOVANNI': 'https://giovanni.gsfc.nasa.gov/'
-}
+### Command line
 
-ML_CONFIG = {
-    'MODELS': ['RandomForest', 'GradientBoosting', 'SVR'],
-    'CV_FOLDS': 5,
-    'TEST_SIZE': 0.2
-}
+```bash
+bee-migration analyze              # trends, correlations, summary report
+bee-migration predict              # train and compare the models
+bee-migration charts               # render the charts into images/
+bee-migration all                  # everything above
+
+# Options shared by every command
+bee-migration analyze --data my_observations.csv   # use your own data
+bee-migration analyze --root /tmp/run --seed 7     # output folder and random seed
 ```
 
-### Analysis Parameters
-- **Period**: 2000-2023
-- **Region**: South America
-- **Species**: 50+ bee species
-- **Resolution**: 1km² (climate data)
+A CSV passed with `--data` needs the columns `year`, `region`, `latitude`,
+`longitude`, `temperature`, `precipitation`, `bee_abundance`,
+`species_diversity` and `honey_production`. Without `--data` the commands run
+on simulated observations (2000-2023, five Brazilian regions).
 
-## 📚 Documentation
-
-### Main Scripts
-
-#### `bee_analysis.py`
-```python
-# Complete exploratory analysis
-analyzer = BeeClimateAnalyzer()
-results = analyzer.run_complete_analysis()
-```
-
-#### `bee_migration_predictor.py`
-```python
-# ML predictions
-predictor = BeeMigrationPredictor()
-ml_results = predictor.run_complete_ml_pipeline()
-```
-
-### Usage Examples
+### Python
 
 ```python
-# Load data
-data = analyzer.load_data()
+from bee_migration.analysis.correlation import Correlations
+from bee_migration.analysis.temporal import TemporalPatterns
+from bee_migration.climate.period import DEFAULT_PERIOD
+from bee_migration.climate.region import BRAZILIAN_REGIONS
+from bee_migration.climate.simulation import ClimateSimulation
+from bee_migration.prediction.training import MigrationPredictor
 
-# Temporal analysis
-temporal_results = analyzer.temporal_analysis(data)
+observations = ClimateSimulation(BRAZILIAN_REGIONS, DEFAULT_PERIOD).observations()
 
-# Correlations
-correlations = analyzer.correlation_analysis(data)
+trends = TemporalPatterns(observations).trends()
+pairs = Correlations(observations).notable_pairs()
 
-# Predictions
-predictions = predictor.predict_migration_patterns()
+leaderboard = MigrationPredictor().train(observations)
+best = leaderboard.best()
 ```
+
+### In the browser
+
+The dashboard in `docs/` runs this same package inside the page with
+[Pyodide](https://pyodide.org/): choose a seed, the number of held-out years and
+the measurement to forecast, and the study is computed on your machine. A
+separate chapter loads observed temperatures from Open-Meteo and bee occurrence
+records from GBIF.
+
+```bash
+make site    # builds the package into docs/package and serves http://127.0.0.1:8000
+```
+
+Pushes to `main` publish the site through the `Pages` workflow.
 
 ## 🧪 Tests
 
 ```bash
-# Run tests
-pytest tests/
+pip install -e ".[dev]"
 
-# Coverage
-pytest --cov=src tests/
+pytest                 # tests with coverage
+ruff check src tests   # linting
+ruff format src tests  # formatting
 
-# Linting
-flake8 src/
-black src/
+node --test "tests/web/*.test.mjs"   # site utilities
 ```
 
 ## 📋 Roadmap
@@ -330,10 +330,11 @@ black src/
 - [x] **Cross-validation of results**
 - [x] **Evidence-based recommendations**
 
+- [x] Interactive dashboard that runs the package in the browser
+- [x] Live field data from GBIF and Open-Meteo
+
 ### 🚧 **In Development**
 - [ ] REST API for predictions
-- [ ] Interactive dashboard
-- [ ] Real-time data integration
 - [ ] Cloud deployment
 
 ### 🔮 **Future**
