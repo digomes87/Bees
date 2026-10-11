@@ -5,8 +5,8 @@ Data de Geração: 22/08/2025 16:14:30
 
 ## RESUMO EXECUTIVO
 
-Este relatório integra dados locais do projeto com evidências científicas de múltiplos 
-estudos sobre migração de abelhas devido às mudanças climáticas, fornecendo uma 
+Este relatório integra dados locais do projeto com evidências científicas de múltiplos
+estudos sobre migração de abelhas devido às mudanças climáticas, fornecendo uma
 visão abrangente e comparativa dos padrões observados.
 
 ## 1. INTEGRAÇÃO DE DADOS
@@ -34,7 +34,7 @@ visão abrangente e comparativa dos padrões observados.
 - **Consenso**: 85-90% das espécies migram para o sul
 
 #### 2.2 Fatores Climáticos:
-- **Aumento de Temperatura**: 
+- **Aumento de Temperatura**:
   - UFPR: 2.5°C projetado
   - Dados Locais: 2.1-3.2°C observado/projetado
   - Consenso: 2-3°C de aumento crítico
@@ -151,7 +151,7 @@ visão abrangente e comparativa dos padrões observados.
 ---
 
 **Metodologia de Integração:**
-Este relatório combina análise quantitativa de dados locais com revisão sistemática 
+Este relatório combina análise quantitativa de dados locais com revisão sistemática
 de literatura científica, utilizando métodos de síntese de evidências e validação cruzada.
 
 **Fontes Integradas:**

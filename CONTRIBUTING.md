@@ -30,9 +30,10 @@ This project adheres to a code of conduct that promotes a welcoming and inclusiv
 
 ### Prerequisites
 
-- Python 3.8 or higher
+- Python 3.11 or higher
 - pip or conda package manager
 - Git
+- Node.js 22 or higher, only to run the dashboard's tests
 
 ### Environment Setup
 
@@ -45,12 +46,14 @@ cd Bees
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
-# Install dependencies
-pip install -r requirements.txt
+# Install the package with its development tools
+pip install -e ".[dev]"
 
-# Install development dependencies (if available)
-pip install -r requirements-dev.txt
+# Check your changes before every commit
+pre-commit install
 ```
+
+With conda: `conda env create -f environment.yml`.
 
 ### Running Tests
 
@@ -58,11 +61,14 @@ pip install -r requirements-dev.txt
 # Run all tests
 pytest
 
-# Run tests with coverage
-pytest --cov=src
+# Run one test file, without the coverage threshold
+pytest tests/test_analysis.py --no-cov
 
-# Run specific test file
-pytest tests/test_specific_module.py
+# Run the dashboard's tests
+node --test "tests/web/*.test.mjs"
+
+# Try the dashboard locally
+make site
 ```
 
 ## Contributing Guidelines
@@ -118,27 +124,51 @@ ruff check src/ tests/
 
 ```
 tests/
-├── unit/           # Unit tests
-├── integration/    # Integration tests
-├── fixtures/       # Test data and fixtures
-└── conftest.py     # Pytest configuration
+├── conftest.py        # shared fixtures
+├── test_climate.py    # observations and simulated datasets
+├── test_analysis.py   # trends, correlations, regions
+├── test_prediction.py # features, models, scores
+├── test_sources.py    # GBIF and Open-Meteo answers
+├── test_web.py        # studies as JSON for the dashboard
+├── test_outputs.py    # reports, charts, command line
+├── test_notebook.py   # the tutorial runs end to end
+└── web/               # dashboard utilities (node --test)
 ```
 
 ### Writing Tests
 
+Name a test after the behaviour it checks and follow arrange, act, assert:
+
+```python
+from bee_migration.analysis.temporal import TemporalPatterns
+from bee_migration.climate.observations import Observations
+from tests.conftest import region_table
+
+
+def test_trend_is_the_yearly_slope():
+    table = region_table("North", temperature=[10.0, 10.5, 11.0, 11.5])
+
+    trends = TemporalPatterns(Observations(table)).trends()
+
+    assert trends.loc["North", "temperature"] == 0.5
+```
+
+## Writing Tests
+
 ```python
 import pytest
 from src.module import function_to_test
+
 
 def test_function_behavior():
     """Test that function behaves correctly."""
     # Arrange
     input_data = "test_input"
     expected_output = "expected_result"
-    
+
     # Act
     result = function_to_test(input_data)
-    
+
     # Assert
     assert result == expected_output
 ```
@@ -264,7 +294,7 @@ gh pr create --base main
 
 - [Project Documentation](./README.md)
 - [Scientific Papers](./results/scientific_papers_synthesis.md)
-- [API Documentation](./docs/)
+- [Dashboard](https://digomes87.github.io/Bees/) (source in `./docs/`)
 - [Issue Tracker](https://github.com/digomes87/Bees/issues)
 
 ## Questions?

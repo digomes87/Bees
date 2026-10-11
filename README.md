@@ -1,258 +1,48 @@
-# 🐝 Bee Climate Analysis
+# Bee Migration Analysis
 
-[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Active-brightgreen.svg)]()
-[![Scientific Papers](https://img.shields.io/badge/Papers-6%20Integrated-blue.svg)]()
-[![Evidence Level](https://img.shields.io/badge/Evidence-Very%20High-green.svg)]()
+[![CI](https://github.com/digomes87/Bees/actions/workflows/ci.yml/badge.svg)](https://github.com/digomes87/Bees/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![Dashboard](https://img.shields.io/badge/Dashboard-live-b8740a.svg)](https://digomes87.github.io/Bees/)
 
-> Analysis of climate change impact on South American bee populations using Machine Learning and data analysis.
+A Python package and a browser dashboard for studying how climate relates to
+bee populations in South America: regional trends, correlations, and models
+that forecast bee measurements from climate.
 
-## 🚨 **CRITICAL SCIENTIFIC DISCOVERY**
+**[Open the dashboard](https://digomes87.github.io/Bees/)** — it runs this
+package in your browser, nothing to install.
 
-> **📊 SCIENTIFIC CONSENSUS CONFIRMED**: Integrated analysis of 6 scientific studies confirms that **85-90% of bees are migrating southward** due to climate change.
-> 
-> **⏰ URGENCY**: Conservation window of only **5-10 years** for effective action.
-> 
-> **📍 EMBLEMATIC CASE**: *Bombus bellicosus* already locally extinct in Curitiba.
-> 
-> **🗺️ CRITICAL AREA**: Southern Brazilian grasslands identified as priority conservation zone.
+## What the data is
 
-## 📋 About the Project
+Read this before quoting any number from the project.
 
-This project investigates how climate change affects bee populations in South America, using advanced data analysis techniques and machine learning to identify patterns, correlations, and predict future scenarios.
+| Data | Where it comes from | What it supports |
+|------|--------------------|------------------|
+| Regional observations (temperature, precipitation, bee abundance, diversity, honey) | **Simulated** from assumed warming and decline rates | Demonstrating the method. No scientific conclusion. |
+| Observed temperature | Open-Meteo archive (ERA5 reanalysis), fetched live | Real warming at five points, one per Brazilian region |
+| Bee occurrence records | GBIF, family Apidae, fetched live | Where bees were *recorded*, which also reflects where people looked |
+| Figures in the literature charts | Entered by hand as a reading of the cited studies | Illustration only; not extracted from the studies' datasets |
 
-### 🎯 Objectives
+The question in the project's name, whether bees are moving south, is **not
+answered** by this repository. The cited literature projects southward range
+shifts for south-eastern South America. The live field chapter, loaded on
+2026-10-11, showed +0.10 °C per decade at the five region centres and a mean
+latitude of GBIF records that barely moved (−0.1° per decade over 136,300
+records). Record locations follow observers as much as bees, so that neither
+confirms nor rules out a shift.
 
-- **Exploratory Analysis**: Investigate spatial and temporal distribution of bees
-- **Climate Correlation**: Quantify relationships between climate and bee abundance
-- **ML Prediction**: Develop models to predict migration and abundance
-- **Visualization**: Create informative maps and charts
-- **Reports**: Generate actionable insights for conservation
-
-## 🚀 Quick Start
+## Quick start
 
 ```bash
-# Clone the repository
 git clone https://github.com/digomes87/Bees.git
 cd Bees
-
-# Install the package
 pip install -e .
 
-# Run complete analysis
-bee-migration analyze
-
-# Run ML predictions
-bee-migration predict
-
-# Render the charts
-bee-migration charts
+bee-migration all        # analysis, model comparison and charts
 ```
 
-## 📊 Features
+Requires Python 3.11 or newer.
 
-### 🔍 Exploratory Analysis
-- Geographic distribution of species
-- Temporal abundance analysis
-- Climate-biodiversity correlations
-- Seasonal pattern identification
-
-### 🤖 Machine Learning
-- **Models**: Random Forest, Gradient Boosting, SVR, Linear Regression
-- **Features**: Climate, geographic and temporal variables
-- **Metrics**: R², RMSE, MAE, MAPE
-- **Validation**: Cross-validation and holdout test
-
-### 📈 Visualizations
-- Species distribution maps
-- Temporal trend charts
-- Correlation heatmaps
-- Feature importance analysis
-
-## 🏗️ Architecture
-
-```
-Bees/
-├── src/bee_migration/
-│   ├── climate/                 # Observations and simulated datasets
-│   ├── analysis/                # Temporal, correlation and geographic patterns
-│   ├── prediction/              # Features, model catalog, training, scores
-│   ├── evidence/                # Figures summarised from the cited studies
-│   ├── charts/                  # Chart panels and gallery
-│   ├── reports/                 # Plain-text reports
-│   └── cli.py                   # `bee-migration` command
-├── tests/                       # Test suite
-├── data/
-│   ├── raw/                     # Raw data
-│   ├── processed/               # Processed data
-│   └── simulated/               # Simulated data
-├── results/
-│   ├── models/                  # Trained models
-│   ├── reports/                 # Reports
-│   └── *.csv                    # Results
-├── images/                      # Generated charts
-├── docs/                        # Documentation
-└── requirements.txt             # Dependencies
-```
-
-## 🛠️ Technologies
-
-### Core
-- **Python 3.8+**: Main language
-- **Pandas**: Data manipulation
-- **NumPy**: Numerical computing
-- **Scikit-learn**: Machine Learning
-
-### Visualization
-- **Matplotlib**: Static charts
-- **Seaborn**: Statistical visualizations
-- **Plotly**: Interactive charts
-
-### Geospatial Analysis
-- **GeoPandas**: Geographic data
-- **Folium**: Interactive maps
-
-### Data APIs
-- **GBIF**: Biodiversity data
-- **WorldClim**: Climate data
-- **NASA**: Satellite data
-
-## 📈 Results
-
-### 🔬 Scientific Discoveries Based on Papers
-
-#### **Evidence Convergence: Southward Migration**
-Integrated analysis of 6 scientific studies confirms consistent pattern of bee migration southward due to climate change:
-
-- **📊 Scientific Consensus**: 85-90% of studies confirm south/southwest migration
-- **🌡️ Critical Threshold**: 2.5°C increase as tipping point
-- **📍 Indicator Species**: *Bombus bellicosus* (local extinction in Curitiba)
-- **🗺️ Critical Area**: Southern Brazilian grasslands identified as priority conservation zone
-
-#### **Integrated Studies**
-1. **UFPR**: 18 neotropical species, projection until 2050
-2. **Dryad Dataset**: Species distribution modeling
-3. **PMC Studies**: Global impacts and emerging pests
-4. **Ecology Letters**: Community restructuring (North America)
-5. **Aegean Study**: Impacts on island ecosystems
-
-### 📊 Impacts by Functional Group
-
-| Group | Impact | Trend |
-|-------|--------|-------|
-| **Eusocial** | -35% | 🔴 High vulnerability |
-| **Solitary** | -20% | 🟡 Moderate vulnerability |
-| **Specialists** | -40% | 🔴 Critical |
-| **Generalists** | +15% | 🟢 Benefited |
-
-### 🎯 Temporal Projections
-
-#### **Migration Scenarios (2024-2050)**
-- **🟢 Conservative**: 80% of species migrate by 2050
-- **🟡 Moderate**: 95% of species migrate by 2050 (most likely)
-- **🔴 Aggressive**: 100% of species migrate by 2040
-
-### ML Performance Metrics
-- **Best Model**: Linear Regression (R² = 0.81 on the four most recent years, held out)
-- **RMSE**: 5.2 (bee abundance)
-- **Data**: simulated observations; see `results/ml_predictions_report.txt`
-
-### Key Insights
-1. **Negative Correlation**: Temperature increase reduces abundance
-2. **Seasonality**: Abundance peaks in autumn/winter
-3. **Geography**: Mountainous regions more resilient
-4. **Trend**: 15% decline in the last decade
-5. **🚨 Urgency**: 5-10 year conservation window
-
-## 📊 Visualizations
-
-### 🔬 Scientific Paper Analysis
-
-![UFPR Analysis](images/ufpr_migration_analysis.png)
-*Specific analysis of UFPR study on South American bee migration*
-
-![Comparative Temperature Analysis](images/comparative_temperature_analysis.png)
-*Comparison of temperature trends between local data and scientific studies*
-
-![Migration Patterns Synthesis](images/migration_patterns_synthesis.png)
-*Integrated synthesis of migration patterns based on multiple scientific studies*
-
-### 📈 Local Data Analysis
-
-![Climate Impact](images/climate_impact_summary.png)
-*Summary of climate impact on bee populations*
-
-![Correlation Analysis](images/correlation_analysis.png)
-*Correlation matrix between climate variables and bee abundance*
-
-![Geographic Distribution](images/geographic_distribution.png)
-*Geographic distribution of bee species*
-
-![Species Decline](images/species_honey_decline.png)
-*Analysis of honey-producing species decline*
-
-![Temperature-Migration Trend](images/temperature_migration_trend.png)
-*Relationship between temperature increase and migration patterns*
-
-## 🔬 Scientific Paper Discoveries
-
-### 📋 Evidence Synthesis
-
-This project integrated analysis of **6 main scientific studies** on bee migration due to climate change:
-
-#### 🎯 **Key Findings**
-
-1. **🌍 Global Consensus**: 85-90% of studies confirm south/southwest migration
-2. **🌡️ Critical Threshold**: 2.5°C warming as tipping point
-3. **📍 Emblematic Case**: *Bombus bellicosus* - local extinction in Curitiba
-4. **🗺️ Priority Area**: Southern Brazilian grasslands as critical zone
-5. **⏰ Temporal Urgency**: 5-10 year conservation window
-
-#### 📊 **Scientific Validation**
-
-| Aspect | Evidence Level | Converging Sources |
-|--------|---------------|-------------------|
-| **Southward Direction** | ⭐⭐⭐⭐⭐ Very High | 5/5 studies |
-| **Speed** | ⭐⭐⭐⭐ High | 4/5 studies |
-| **Climate Factors** | ⭐⭐⭐⭐⭐ Very High | 5/5 studies |
-| **Vulnerable Groups** | ⭐⭐⭐⭐ High | 4/5 studies |
-
-### 🎯 **Evidence-Based Recommendations**
-
-#### 🚨 **Immediate Actions (2024-2027)**
-- ✅ Urgent protection of Brazilian southern grasslands
-- 🔍 Continuous monitoring of indicator species
-- 🌿 Creation of north-south ecological corridors
-- ⚠️ Control of emerging pests (Small Hive Beetle)
-
-#### 🔄 **Medium Term (2027-2035)**
-- 🌱 Habitat restoration in the south
-- 🚀 Assisted relocation programs
-- 📊 Expansion of scientific monitoring
-- 🏛️ Integration into public policies
-
-#### 🌟 **Long Term (2035-2050)**
-- 🌾 Agricultural landscape adaptation
-- 🌎 Transnational conservation networks
-- 🧬 Genetic improvement programs
-- 📜 Climate adaptation policies
-
-### 📚 **Generated Reports**
-
-- 📄 [Comprehensive Migration Report](results/bee_migration_comprehensive_report.txt)
-- 📊 [Integrated Analysis](results/integrated_migration_report.txt)
-- 🔬 [Scientific Papers Synthesis](results/scientific_papers_synthesis.md)
-
-### 🔗 **Integrated Scientific Sources**
-
-1. **UFPR** - Climate change pushes South American bees southward
-2. **Dryad Dataset** - Climate-induced range shifts in neotropical bees
-3. **PMC Studies** - Global warming and honey bee pests + Island bee impacts
-4. **Ecology Letters** - Bumble bee community restructuring (North America)
-5. **Kaggle Climate Data** - Climate trend validation
-
-## 🔧 Usage
+## Usage
 
 ### Command line
 
@@ -267,10 +57,17 @@ bee-migration analyze --data my_observations.csv   # use your own data
 bee-migration analyze --root /tmp/run --seed 7     # output folder and random seed
 ```
 
-A CSV passed with `--data` needs the columns `year`, `region`, `latitude`,
-`longitude`, `temperature`, `precipitation`, `bee_abundance`,
-`species_diversity` and `honey_production`. Without `--data` the commands run
-on simulated observations (2000-2023, five Brazilian regions).
+A CSV passed with `--data` needs one row per region and year, with the columns
+`year`, `region`, `latitude`, `longitude`, `temperature`, `precipitation`,
+`bee_abundance`, `species_diversity` and `honey_production`. Years must be
+consecutive within each region. Without `--data` the commands run on simulated
+observations (2000–2023, five Brazilian regions).
+
+| Command | Writes |
+|---------|--------|
+| `analyze` | `results/analysis_summary_report.txt`, `results/correlation_analysis_correlation_matrix.csv`, `data/processed/bee_climate_processed.csv` |
+| `predict` | `results/ml_predictions_report.txt`, `results/model_metrics.csv`, `results/feature_importance.csv`, `results/models/*.pkl` |
+| `charts` | `images/*.png`, `data/bee_climate_data.csv`, `data/bee_geographic_data.csv` |
 
 ### Python
 
@@ -291,13 +88,14 @@ leaderboard = MigrationPredictor().train(observations)
 best = leaderboard.best()
 ```
 
+`notebooks/bee_migration_tutorial.ipynb` walks through the same steps.
+
 ### In the browser
 
-The dashboard in `docs/` runs this same package inside the page with
-[Pyodide](https://pyodide.org/): choose a seed, the number of held-out years and
-the measurement to forecast, and the study is computed on your machine. A
-separate chapter loads observed temperatures from Open-Meteo and bee occurrence
-records from GBIF.
+The dashboard in `docs/` loads this package into the page with
+[Pyodide](https://pyodide.org/). Choose a seed, the number of held-out years and
+the measurement to forecast; the study is computed on your machine. A separate
+chapter fetches the field data described above.
 
 ```bash
 make site    # builds the package into docs/package and serves http://127.0.0.1:8000
@@ -305,90 +103,130 @@ make site    # builds the package into docs/package and serves http://127.0.0.1:
 
 Pushes to `main` publish the site through the `Pages` workflow.
 
-## 🧪 Tests
+## How it works
+
+1. **Observations** — yearly climate and bee measurements per region, validated
+   on load, with anomalies, a climate stress index and a bee health index derived
+   from them.
+2. **Analysis** — linear trend per region, sharp bends in a series, correlations
+   (overall, per region, and with bee abundance lagged by one to three years),
+   and regional summaries.
+3. **Prediction** — four regressors (linear, random forest, gradient boosting,
+   SVR) learn a bee measurement from climate and from the previous year's value.
+   They are tuned with time-ordered cross-validation and scored on the most
+   recent years, which they never see while training.
+4. **Outputs** — plain-text reports, CSV tables, charts, or JSON for the
+   dashboard.
+
+```
+Bees/
+├── src/bee_migration/
+│   ├── climate/       # observations and simulated datasets
+│   ├── analysis/      # temporal, correlation and geographic patterns
+│   ├── prediction/    # features, model catalog, training, scores
+│   ├── sources/       # GBIF and Open-Meteo answers into tables
+│   ├── evidence/      # figures summarised from the cited studies
+│   ├── charts/        # chart panels and gallery
+│   ├── reports/       # plain-text reports
+│   ├── web/           # studies as JSON for the dashboard
+│   └── cli.py         # the bee-migration command
+├── docs/              # dashboard (HTML, CSS, JavaScript)
+├── tests/             # Python tests; tests/web holds the site's tests
+├── notebooks/         # tutorial
+├── data/ results/ images/   # outputs of the commands above
+└── pyproject.toml
+```
+
+## Results on the simulated observations
+
+These describe the simulation's assumptions coming back out of the pipeline.
+They are useful for checking the method, not for learning about bees.
+
+| Model | R² on held-out years | RMSE |
+|-------|---------------------|------|
+| Linear Regression | 0.81 | 5.2 |
+| SVR | 0.78 | 5.6 |
+| Random Forest | 0.53 | 8.0 |
+| Gradient Boosting | 0.48 | 8.5 |
+
+Forecasting bee abundance, four most recent years held out, seed 42. Full
+figures are in `results/ml_predictions_report.txt` and
+`results/model_metrics.csv`.
+
+## Charts
+
+Drawn from simulated continent-wide series:
+
+![Temperature and migration trend](images/temperature_migration_trend.png)
+![Correlation analysis](images/correlation_analysis.png)
+![Species and honey decline](images/species_honey_decline.png)
+![Geographic distribution](images/geographic_distribution.png)
+![Climate impact summary](images/climate_impact_summary.png)
+
+Drawn from figures entered by hand as a reading of the literature:
+
+![UFPR migration analysis](images/ufpr_migration_analysis.png)
+![Comparative temperature analysis](images/comparative_temperature_analysis.png)
+![Migration patterns synthesis](images/migration_patterns_synthesis.png)
+
+## Literature behind the project
+
+The project was motivated by published work on climate-driven range shifts in
+bees. A synthesis in Portuguese is in `results/scientific_papers_synthesis.md`.
+
+- UFPR — climate change pushing South American bees southward (18 species,
+  south-eastern South America, projections to 2050)
+- Dryad dataset — climate-induced range shifts in the south-eastern Neotropics
+- Ecology Letters — warming temperatures restructuring bumble bee communities in
+  North America
+- PMC — global warming and the small hive beetle, a honey bee pest
+- PMC — climate change impacts on island bees in the Aegean Archipelago
+
+## Development
 
 ```bash
 pip install -e ".[dev]"
 
-pytest                 # tests with coverage
-ruff check src tests   # linting
-ruff format src tests  # formatting
-
-node --test "tests/web/*.test.mjs"   # site utilities
+pytest                               # Python tests with coverage
+ruff check src tests                 # linting
+ruff format src tests                # formatting
+node --test "tests/web/*.test.mjs"   # dashboard utilities
 ```
 
-## 📋 Roadmap
+The project follows Git Flow: work branches from `develop`, pull requests into
+`develop`, releases from `develop` into `main`. The `CI` workflow must pass
+before anything is merged. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-### ✅ **Completed**
-- [x] Base project structure
-- [x] Exploratory data analysis
-- [x] Machine learning models
-- [x] Visualizations and reports
-- [x] **Scientific paper analysis on migration**
-- [x] **Scientific evidence integration**
-- [x] **Multi-source discovery synthesis**
-- [x] **Cross-validation of results**
-- [x] **Evidence-based recommendations**
+Docker is optional:
 
-- [x] Interactive dashboard that runs the package in the browser
-- [x] Live field data from GBIF and Open-Meteo
+```bash
+docker compose run --rm analysis all   # run the pipeline in a container
+docker compose up site                 # serve the dashboard on http://127.0.0.1:8000
+```
 
-### 🚧 **In Development**
-- [ ] REST API for predictions
-- [ ] Cloud deployment
+## Roadmap
 
-### 🔮 **Future**
-- [ ] Real-time monitoring of indicator species
-- [ ] Integration with climate alert systems
-- [ ] Scientific collaboration platform
-- [ ] Mobile app for citizen science
+Done:
 
-## 🤝 Contributing
+- Tested package and command line
+- Dashboard that runs the package in the browser
+- Live field data from GBIF and Open-Meteo
 
-1. **Fork** the project
-2. **Clone** your fork
-3. **Create** a branch (`git checkout -b feature/new-feature`)
-4. **Commit** your changes (`git commit -am 'Add new feature'`)
-5. **Push** to the branch (`git push origin feature/new-feature`)
-6. **Open** a Pull Request
+Open:
 
-### Guidelines
-- Follow PEP 8 for Python code
-- Add tests for new features
-- Document changes in CHANGELOG
-- Use semantic commits
+- Field data from the command line, not only in the dashboard
+- Cross-validation folds cut on year boundaries for any table shape
+- REST API for predictions, if something needs to consume it
+- Occurrence data corrected for sampling effort, so record locations can say
+  something about ranges
 
-## 📄 License
+## Acknowledgments
 
-This project is licensed under the MIT License - see [LICENSE](LICENSE) for details.
+Data: [GBIF](https://www.gbif.org/) and [Open-Meteo](https://open-meteo.com/)
+(ERA5 reanalysis from Copernicus/ECMWF). Studies: UFPR, Dryad, Ecology Letters
+and PMC, as listed above.
 
-## 👥 Team
+## Author
 
-- **Diego Gomes** - *Lead Developer* - [@digomes87](https://github.com/digomes87)
-
-## 🙏 Acknowledgments
-
-### 🔬 **Scientific Sources**
-- **UFPR** - Federal University of Paraná (South American migration study)
-- **Dryad Digital Repository** - Neotropical bee dataset
-- **PMC (PubMed Central)** - Global warming and bee studies
-- **Ecology Letters** - Community restructuring research
-- **Kaggle** - Climate change datasets
-
-### 🌐 **Data and Infrastructure**
-- **GBIF** - Biodiversity data
-- **WorldClim** - Climate data
-- **NASA** - Satellite data
-- **Python Community** - Libraries and tools
-
-## 📞 Contact
-
-- **GitHub**: [@digomes87](https://github.com/digomes87)
-- **Issues**: [GitHub Issues](https://github.com/digomes87/Bees/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/digomes87/Bees/discussions)
-
----
-
-<div align="center">
-  <strong>🐝 Bee Climate Analysis - Protecting Pollinators Through Data Science 🐝</strong>
-</div>
+Diego Gomes — [@digomes87](https://github.com/digomes87).
+Questions and bugs: [issues](https://github.com/digomes87/Bees/issues).
