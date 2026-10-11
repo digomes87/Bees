@@ -1,17 +1,7 @@
-# Dependências para Análise de Abelhas e Mudanças Climáticas
-# Projeto: Bee Behavior Analysis
-# Autor: Diego Gomes
-
-# Análise de dados essenciais
-numpy>=1.21.0
-pandas>=1.3.0
-
-# Visualização
-matplotlib>=3.5.0
-seaborn>=0.11.0
-
-# Machine Learning básico
-scikit-learn>=1.0.0
-
-# Utilitários
-requests>=2.25.0
+# Runtime dependencies (mirrors pyproject.toml)
+numpy>=1.26
+pandas>=2.1
+scikit-learn>=1.4
+matplotlib>=3.8
+seaborn>=0.13
+joblib>=1.3

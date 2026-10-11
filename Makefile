@@ -11,7 +11,7 @@ help:
 	@echo "  test         - Run tests"
 	@echo "  test-cov     - Run tests with coverage"
 	@echo "  lint         - Run linting checks"
-	@echo "  format       - Format code with black and isort"
+	@echo "  format       - Format code with ruff"
 	@echo "  clean        - Clean temporary files"
 	@echo "  run-analysis - Run complete bee migration analysis"
 	@echo "  generate-charts - Generate all scientific charts"
@@ -22,11 +22,11 @@ help:
 # Installation
 install:
 	@echo "Installing production dependencies..."
-	pip install -r requirements.txt
+	pip install -e .
 
-install-dev: install
+install-dev:
 	@echo "Installing development dependencies..."
-	pip install -r requirements-dev.txt
+	pip install -e ".[dev]"
 
 # Environment setup
 setup-env:
@@ -49,7 +49,7 @@ test:
 
 test-cov:
 	@echo "Running tests with coverage..."
-	pytest tests/ -v --cov=src --cov-report=html --cov-report=term
+	pytest tests/ -v --cov-report=html
 
 test-fast:
 	@echo "Running fast tests..."
@@ -58,18 +58,16 @@ test-fast:
 # Code quality
 lint:
 	@echo "Running linting checks..."
-	flake8 src/ tests/
-	mypy src/
+	ruff check src/ tests/
 
 format:
 	@echo "Formatting code..."
-	black src/ tests/
-	isort src/ tests/
+	ruff format src/ tests/
+	ruff check --fix src/ tests/
 
 format-check:
 	@echo "Checking code format..."
-	black --check src/ tests/
-	isort --check-only src/ tests/
+	ruff format --check src/ tests/
 
 # Security
 security:
@@ -80,21 +78,25 @@ security:
 # Analysis and charts
 run-analysis:
 	@echo "Running complete bee migration analysis..."
-	cd src && python bee_analysis.py
-	cd src && python bee_migration_analysis.py
-	cd src && python comparative_analysis.py
+	bee-migration analyze
 
 generate-charts:
 	@echo "Generating all scientific charts..."
-	cd src && python generate_charts_english.py
-
-generate-charts-pt:
-	@echo "Generating charts in Portuguese..."
-	cd src && python generate_charts.py
+	bee-migration charts
 
 run-predictor:
 	@echo "Running migration predictor..."
-	cd src && python bee_migration_predictor.py
+	bee-migration predict
+
+# Site
+site:
+	@echo "Building the analysis package into the site and serving it..."
+	pip wheel . --no-deps --wheel-dir docs/package
+	python -m http.server 8000 --bind 127.0.0.1 --directory docs
+
+test-site:
+	@echo "Running site tests..."
+	node --test "tests/web/*.test.mjs"
 
 # Data processing
 process-data:
