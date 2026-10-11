@@ -10,6 +10,7 @@ description = "Climate impact assessment on bee migration patterns in South Amer
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
+license-files = ["LICENSE"]
 keywords = ["bees", "migration", "climate", "analysis", "machine-learning"]
 dependencies = [
     "numpy>=1.26",

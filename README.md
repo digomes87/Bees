@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/digomes87/Bees/actions/workflows/ci.yml/badge.svg)](https://github.com/digomes87/Bees/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Dashboard](https://img.shields.io/badge/Dashboard-live-b8740a.svg)](https://digomes87.github.io/Bees/)
 
 A Python package and a browser dashboard for studying how climate relates to
@@ -225,6 +226,10 @@ Open:
 Data: [GBIF](https://www.gbif.org/) and [Open-Meteo](https://open-meteo.com/)
 (ERA5 reanalysis from Copernicus/ECMWF). Studies: UFPR, Dryad, Ecology Letters
 and PMC, as listed above.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
 
 ## Author
 
