@@ -2,7 +2,7 @@
 
 ## Análise Integrada dos Papers Científicos Fornecidos
 
-**Data:** 22 de agosto de 2025  
+**Data:** 22 de agosto de 2025
 **Análise baseada em:** 6 fontes científicas principais + dados locais
 
 ---
@@ -257,24 +257,24 @@
 ## 📋 CONCLUSÕES FINAIS
 
 ### **CERTEZAS CIENTÍFICAS:**
-✅ **Migração para o sul é real e acelerada**  
-✅ **Bombus bellicosus é indicador validado**  
-✅ **Campos sulinos são área crítica de conservação**  
-✅ **Grupos funcionais respondem diferentemente**  
-✅ **Corredores ecológicos são essenciais**  
+✅ **Migração para o sul é real e acelerada**
+✅ **Bombus bellicosus é indicador validado**
+✅ **Campos sulinos são área crítica de conservação**
+✅ **Grupos funcionais respondem diferentemente**
+✅ **Corredores ecológicos são essenciais**
 
 ### **INCERTEZAS PRINCIPAIS:**
-❓ **Velocidade exata da migração**  
-❓ **Capacidade de adaptação local**  
-❓ **Interações com outros fatores**  
-❓ **Eficácia de medidas de conservação**  
-❓ **Impactos socioeconômicos precisos**  
+❓ **Velocidade exata da migração**
+❓ **Capacidade de adaptação local**
+❓ **Interações com outros fatores**
+❓ **Eficácia de medidas de conservação**
+❓ **Impactos socioeconômicos precisos**
 
 ### **URGÊNCIA DA AÇÃO:**
-🚨 **CRÍTICA** - Janela de oportunidade de 5-10 anos  
-🕐 **TEMPO LIMITADO** - Mudanças já em curso  
-💰 **CUSTO-EFETIVO** - Prevenção vs. remediação  
-🤝 **COOPERAÇÃO** - Necessária entre países  
+🚨 **CRÍTICA** - Janela de oportunidade de 5-10 anos
+🕐 **TEMPO LIMITADO** - Mudanças já em curso
+💰 **CUSTO-EFETIVO** - Prevenção vs. remediação
+🤝 **COOPERAÇÃO** - Necessária entre países
 
 ---
 
@@ -283,15 +283,15 @@
 1. **UFPR** - Mudanças climáticas empurram abelhas sul-americanas para o sul
 2. **Dryad Dataset** - Climate-induced range shifts in neotropical bees
 3. **PMC 6856679** - Global warming promotes biological invasion of honey bee pest
-4. **Ecology Letters** - Warming temperatures restructuring bumble bee communities  
+4. **Ecology Letters** - Warming temperatures restructuring bumble bee communities
 5. **PMC 9030098** - Climate change impacts on island bees (Aegean)
 6. **Kaggle** - Climate change datasets (validação)
 
 ---
 
-**Análise realizada por:** Sistema de Análise Comparativa  
-**Metodologia:** Síntese de evidências + validação cruzada  
-**Confiabilidade:** Alta (convergência de múltiplas fontes)  
+**Análise realizada por:** Sistema de Análise Comparativa
+**Metodologia:** Síntese de evidências + validação cruzada
+**Confiabilidade:** Alta (convergência de múltiplas fontes)
 **Próxima atualização:** Conforme novos dados disponíveis
 
 ---

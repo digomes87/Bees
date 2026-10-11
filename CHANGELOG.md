@@ -21,6 +21,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Git Flow branching guide in `CONTRIBUTING.md`
 
 ### Changed
+- README rewritten around what the data is and what it does not show
+- Tutorial notebook rewritten for the package and run by the test suite
+- Dockerfile, Compose file, pre-commit hooks, conda environment and Makefile
+  reduced to what the project uses; the unused `.env.example` is gone
 - Models are evaluated on the most recent years, held out chronologically, and
   tuned with time-ordered cross-validation
 - Feature importance is measured by permutation for every model
