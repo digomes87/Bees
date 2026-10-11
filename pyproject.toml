@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -9,7 +9,8 @@ authors = [{ name = "Diego Gomes", email = "diego@example.com" }]
 description = "Climate impact assessment on bee migration patterns in South America"
 readme = "README.md"
 requires-python = ">=3.11"
-license = { text = "MIT" }
+license = "MIT"
+license-files = ["LICENSE"]
 keywords = ["bees", "migration", "climate", "analysis", "machine-learning"]
 dependencies = [
     "numpy>=1.26",
